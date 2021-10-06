@@ -10,9 +10,9 @@
 - The latest version is also tagged with `latest`.
 
 ## Usage
-Practically anything available with `cairo-compile`, `starknet-compile` and `starknet` commands (as specified [here]()) is also available through these images.
+Practically anything available with `cairo-compile`, `starknet-compile` and `starknet` commands (as specified [here](https://www.cairo-lang.org/docs/hello_starknet/index.html)) is also available through these images.
 
-Here are a few usage examples (also try [Docker volume](https://docs.docker.com/storage/volumes/) instead of [Docker bind mount](https://docs.docker.com/storage/bind-mounts/)):
+Here are a few usage examples (These rely on [Docker bind mount](https://docs.docker.com/storage/bind-mounts/); try [Docker volume](https://docs.docker.com/storage/volumes/) instead):
 
 ### Pull and check
 ```

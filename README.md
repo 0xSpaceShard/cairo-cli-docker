@@ -5,7 +5,7 @@
 
 ## Versions
 - Image names are of the form: `shardlabs/cairo-cli:<TAG>`.
-- An image is built for each version, with `TAG` being the version in the semver format (e.g. for version `0.6.1` the image is `shardlabs/cairo-cli:0.6.1`).
+- An image is built for each version, with `TAG` being the version in the semver format (e.g. for version `0.6.2` the image is `shardlabs/cairo-cli:0.6.2`).
 - [The Docker Hub list of versions/tags](https://hub.docker.com/repository/registry-1.docker.io/shardlabs/cairo-cli/tags) is generally up-to-date with [the official Cairo pypi repo](https://pypi.org/pypi/cairo-lang/json).
 - The latest version is also tagged with `latest`.
 
@@ -16,20 +16,20 @@ Here are a few usage examples (These rely on [Docker bind mount](https://docs.do
 
 ### Pull and check
 ```
-$ docker pull shardlabs/cairo-cli:0.6.1
+$ docker pull shardlabs/cairo-cli:0.6.2
 
-$ docker run shardlabs/cairo-cli:0.6.1 cairo-compile -v
-cairo-compile 0.6.1
+$ docker run shardlabs/cairo-cli:0.6.2 cairo-compile -v
+cairo-compile 0.6.2
 
-$ docker run shardlabs/cairo-cli:0.6.1 starknet -v
-starknet 0.6.1
+$ docker run shardlabs/cairo-cli:0.6.2 starknet -v
+starknet 0.6.2
 ```
 
 ### Cairo compiler
 ```
 $ docker run \
     --mount type=bind,source=/my/project/contracts/,target=/app/contracts/ \
-    shardlabs/cairo-cli:0.6.1 \
+    shardlabs/cairo-cli:0.6.2 \
     cairo-compile contracts/test.cairo
 {
     "builtins": [],
@@ -45,7 +45,7 @@ $ docker run \
 ```
 $ docker run \
     --mount type=bind,source=/my/project/contracts/,target=/app/contracts/ \
-    shardlabs/cairo-cli:0.6.1 \
+    shardlabs/cairo-cli:0.6.2 \
     starknet-compile contracts/test.cairo
 {
     "abi": [],

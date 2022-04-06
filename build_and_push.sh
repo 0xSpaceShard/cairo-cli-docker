@@ -26,6 +26,9 @@ while read VERSION; do
         continue
     fi
 
+    REQUIREMENTS_URL="https://raw.githubusercontent.com/starkware-libs/cairo-lang/v$VERSION/scripts/requirements.txt"
+    wget "$REQUIREMENTS_URL" -O requirements.txt
+
     TAGGED_IMAGE=$IMAGE:$VERSION
     docker build -t $TAGGED_IMAGE --build-arg CAIRO_VERSION=$VERSION .
     docker push $TAGGED_IMAGE

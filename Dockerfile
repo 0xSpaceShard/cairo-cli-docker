@@ -9,7 +9,7 @@ ARG CAIRO_VERSION
 RUN pip wheel --no-cache-dir --no-deps\
     --wheel-dir /wheels\
     -r requirements.txt\
-    cairo-lang==$CAIRO_VERSION
+    cairo-lang==$CAIRO_VERSION openzeppelin-cairo-contracts
 
 FROM python:3.7.12-alpine3.15
 

@@ -9,7 +9,11 @@ function docker_tag_exists() {
 IMAGE=shardlabs/cairo-cli
 VERSIONS_FILE=versions.txt
 
-curl https://pypi.org/pypi/cairo-lang/json | jq ".releases | keys" | sed -nr "s/^ *\"(.*)\".*/\1/p" > $VERSIONS_FILE
+curl https://pypi.org/pypi/cairo-lang/json\
+| jq ".releases | keys"\
+| sed -nr "s/^ *\"(.*)\".*/\1/p"\
+| sort -t "." -k1,1n -k2,2n -k3,3n\
+> $VERSIONS_FILE
 
 docker login --username $DOCKER_USER --password $DOCKER_PASS
 while read version; do
@@ -25,10 +29,15 @@ while read version; do
     fi
 
     REQUIREMENTS_URL="https://raw.githubusercontent.com/starkware-libs/cairo-lang/v$version/scripts/requirements.txt"
-    wget "$REQUIREMENTS_URL" -O requirements.txt
+    curl "$REQUIREMENTS_URL" > requirements.txt
 
     TAGGED_IMAGE=$IMAGE:$version
     docker build -t $TAGGED_IMAGE --build-arg CAIRO_VERSION=$version .
+
+    # verify
+    docker run $TAGGED_IMAGE starknet-compile --version
+    docker run $TAGGED_IMAGE starknet --version
+
     docker push $TAGGED_IMAGE
 done < $VERSIONS_FILE
 

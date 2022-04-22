@@ -4,8 +4,9 @@
 - One example of such an environment are Node.js projects, more specifically - [Hardhat](https://github.com/nomiclabs/hardhat) projects, where these images can be used by [Hardhat Docker plugin](https://www.npmjs.com/package/@nomiclabs/hardhat-docker).
 
 ## Versions
-- Image names are of the form: `shardlabs/cairo-cli:<TAG>`.
-- An image is built for each version, with `TAG` being the version in the semver format (e.g. for version `0.8.1` the image is `shardlabs/cairo-cli:0.8.1`).
+- Images built using the linux/amd64 architecture have names: `shardlabs/cairo-cli:<TAG>`.
+- Images built using the linux/arm64 architecture have names: `shardlabs/cairo-cli:<TAG>-arm`
+- An image has been built for each cairo-lang version, with `TAG` being the version in the semver format (e.g. for version `0.8.1` the image is `shardlabs/cairo-cli:0.8.1`).
 - [The Docker Hub list of versions/tags](https://hub.docker.com/repository/registry-1.docker.io/shardlabs/cairo-cli/tags) is generally up-to-date with [the official Cairo pypi repo](https://pypi.org/pypi/cairo-lang/json).
 - The latest version is also tagged with `latest`.
 

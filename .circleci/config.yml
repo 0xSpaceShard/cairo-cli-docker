@@ -1,4 +1,12 @@
-version: 2.1
+version: 2
+
+aliases:
+  - &on_master
+    context: shardlabs
+    filters:
+      branches:
+        only:
+          - master
 
 jobs:
   build_push:
@@ -9,14 +17,27 @@ jobs:
       - setup_remote_docker:
           version: 20.10.7
       - run: ./build_and_push.sh
+  build_push_arm:
+    machine:
+      image: ubuntu-2004:202111-02
+    resource_class: arm.medium
+    steps:
+      - checkout
+      - run:
+          name: Build and push image
+          command: ./build_and_push.sh
+          environment:
+            TAG_SUFFIX: -arm
 
 workflows:
-  version: 2.1
+  version: 2
   build_push:
     jobs:
       - build_push:
-          context: shardlabs
+          <<: *on_master
+      - build_push_arm:
+          context: shardlabs # TODO use on_master
           filters:
             branches:
               only:
-                - master
+                - multiarch

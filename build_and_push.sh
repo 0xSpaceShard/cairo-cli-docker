@@ -21,9 +21,11 @@ while read version; do
         continue
     fi
 
-    echo "Version: $version"
+    tag="${version}${TAG_SUFFIX}"
 
-    if docker_tag_exists $IMAGE $version ; then
+    echo "Version: $version; Tag: $tag"
+
+    if docker_tag_exists $IMAGE $tag ; then
         printf "Skipping\n\n"
         continue
     fi
@@ -31,7 +33,7 @@ while read version; do
     REQUIREMENTS_URL="https://raw.githubusercontent.com/starkware-libs/cairo-lang/v$version/scripts/requirements.txt"
     curl "$REQUIREMENTS_URL" > requirements.txt
 
-    TAGGED_IMAGE=$IMAGE:$version
+    TAGGED_IMAGE=$IMAGE:$tag
     docker build -t $TAGGED_IMAGE --build-arg CAIRO_VERSION=$version .
 
     # verify
@@ -41,10 +43,11 @@ while read version; do
     docker push $TAGGED_IMAGE
 done < $VERSIONS_FILE
 
-LATEST=$(tail -n 1 $VERSIONS_FILE)
-if [[ "$(docker images -q $IMAGE:$LATEST 2> /dev/null)" == "" ]]; then
-    echo "The latest image ($LATEST) is already tagged with 'latest'"
+NEWEST=$(tail -n 1 $VERSIONS_FILE)
+if [[ "$(docker images -q $IMAGE:$NEWEST 2> /dev/null)" == "" ]]; then
+    echo "The newest version ($NEWEST) has already been pushed"
 else
-    docker tag $IMAGE:$LATEST $IMAGE:latest
-    docker push $IMAGE:latest
+    LATEST_TAG="latest$TAG_SUFFIX"
+    docker tag $IMAGE:$NEWEST $IMAGE:$LATEST_TAG
+    docker push $IMAGE:$LATEST_TAG
 fi

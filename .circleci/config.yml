@@ -37,8 +37,4 @@ workflows:
       - build_push:
           <<: *on_master
       - build_push_arm:
-          context: shardlabs # TODO use on_master
-          filters:
-            branches:
-              only:
-                - multiarch
+          <<: *on_master

@@ -30,20 +30,21 @@ while read version; do
         continue
     fi
 
+    tag="${version}${TAG_SUFFIX}"
+    echo "Version: $version; Tag: $tag"
+
     # if at least at minimum version, proceed with building
     if [ $MIN_VER_REACHED == "false" ]; then
         if [ $version == "$MIN_VER" ]; then
             MIN_VER_REACHED="true"
         else
+            printf "Minimum not reached. Skipping\n\n"
             continue
         fi
     fi
 
-    tag="${version}${TAG_SUFFIX}"
-    echo "Version: $version; Tag: $tag"
-
     if docker_tag_exists $IMAGE $tag ; then
-        printf "Skipping\n\n"
+        printf "Image exists. Skipping\n\n"
         continue
     fi
 
@@ -61,10 +62,11 @@ while read version; do
 done < $VERSIONS_FILE
 
 NEWEST=$(tail -n 1 $VERSIONS_FILE)
-if [[ "$(docker images -q $IMAGE:$NEWEST 2> /dev/null)" == "" ]]; then
-    echo "The newest version ($NEWEST) has already been pushed"
+NEWEST_TAG="${NEWEST}${TAG_SUFFIX}"
+if [[ "$(docker images -q $IMAGE:$NEWEST_TAG 2> /dev/null)" == "" ]]; then
+    echo "The newest version ($NEWEST_TAG) has already been pushed"
 else
     LATEST_TAG="latest$TAG_SUFFIX"
-    docker tag $IMAGE:$NEWEST $IMAGE:$LATEST_TAG
+    docker tag $IMAGE:$NEWEST_TAG $IMAGE:$LATEST_TAG
     docker push $IMAGE:$LATEST_TAG
 fi

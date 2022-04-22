@@ -9,11 +9,13 @@ function docker_tag_exists() {
 IMAGE=shardlabs/cairo-cli
 VERSIONS_FILE=versions.txt
 
-curl https://pypi.org/pypi/cairo-lang/json\
-| jq ".releases | keys"\
-| sed -nr "s/^ *\"(.*)\".*/\1/p"\
-| sort -t "." -k1,1n -k2,2n -k3,3n\
+curl https://pypi.org/pypi/cairo-lang/json \
+| jq ".releases | keys" \
+| sed -nr "s/^ *\"(.*)\".*/\1/p" \
+| sort -t "." -k1,1n -k2,2n -k3,3n \
+| tail -n 1 \
 > $VERSIONS_FILE
+# TODO remove tail -n 1
 
 docker login --username $DOCKER_USER --password $DOCKER_PASS
 while read version; do
@@ -25,7 +27,9 @@ while read version; do
 
     echo "Version: $version; Tag: $tag"
 
-    if docker_tag_exists $IMAGE $tag ; then
+    # Checking $version instead of $tag since the introduction of -arm suffix
+    # None of the 19 <VERSION>-arm tags would be present and they would all have to be rebuilt for ~4 hours
+    if docker_tag_exists $IMAGE $version ; then
         printf "Skipping\n\n"
         continue
     fi

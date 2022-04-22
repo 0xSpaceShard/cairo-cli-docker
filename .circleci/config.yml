@@ -28,6 +28,7 @@ jobs:
           command: ./build_and_push.sh
           environment:
             TAG_SUFFIX: -arm
+            MIN_VER: 0.8.1
 
 workflows:
   version: 2

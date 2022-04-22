@@ -13,23 +13,36 @@ curl https://pypi.org/pypi/cairo-lang/json \
 | jq ".releases | keys" \
 | sed -nr "s/^ *\"(.*)\".*/\1/p" \
 | sort -t "." -k1,1n -k2,2n -k3,3n \
-| tail -n 1 \
 > $VERSIONS_FILE
-# TODO remove tail -n 1
+
 
 docker login --username $DOCKER_USER --password $DOCKER_PASS
+
+# Will iterate over sorted versions and start building images when minimum version reached
+if [ -z $MIN_VER ]; then
+    MIN_VER_REACHED="true"
+else
+    MIN_VER_REACHED="false"
+fi
+
 while read version; do
     if [ -z $version ]; then
         continue
     fi
 
-    tag="${version}${TAG_SUFFIX}"
+    # if at least at minimum version, proceed with building
+    if [ $MIN_VER_REACHED == "false" ]; then
+        if [ $version == "$MIN_VER" ]; then
+            MIN_VER_REACHED="true"
+        else
+            continue
+        fi
+    fi
 
+    tag="${version}${TAG_SUFFIX}"
     echo "Version: $version; Tag: $tag"
 
-    # Checking $version instead of $tag since the introduction of -arm suffix
-    # None of the 19 <VERSION>-arm tags would be present and they would all have to be rebuilt for ~4 hours
-    if docker_tag_exists $IMAGE $version ; then
+    if docker_tag_exists $IMAGE $tag ; then
         printf "Skipping\n\n"
         continue
     fi

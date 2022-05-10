@@ -16,7 +16,7 @@ curl https://pypi.org/pypi/cairo-lang/json \
 > $VERSIONS_FILE
 
 
-# docker login --username $DOCKER_USER --password $DOCKER_PASS
+docker login --username $DOCKER_USER --password $DOCKER_PASS
 
 # Will iterate over sorted versions and start building images when minimum version reached
 if [ -z $MIN_VER ]; then

@@ -28,7 +28,7 @@ jobs:
           command: ./build_and_push.sh
           environment:
             TAG_SUFFIX: -arm
-            MIN_VER: 0.8.1
+            MIN_VER: 0.8.1 # this should only be changed to something lower if we want to build all the arm images for those versions as well
 
 workflows:
   version: 2

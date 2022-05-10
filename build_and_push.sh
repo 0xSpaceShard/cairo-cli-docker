@@ -16,7 +16,7 @@ curl https://pypi.org/pypi/cairo-lang/json \
 > $VERSIONS_FILE
 
 
-docker login --username $DOCKER_USER --password $DOCKER_PASS
+# docker login --username $DOCKER_USER --password $DOCKER_PASS
 
 # Will iterate over sorted versions and start building images when minimum version reached
 if [ -z $MIN_VER ]; then
@@ -49,6 +49,11 @@ while read version; do
     fi
 
     REQUIREMENTS_URL="https://raw.githubusercontent.com/starkware-libs/cairo-lang/v$version/scripts/requirements.txt"
+    status=$(curl -s -o /dev/null -w "%{http_code}" "$REQUIREMENTS_URL")
+    if [ "$status" != 200 ]; then
+        printf "Warning! Got status $status\n\n"
+        continue
+    fi
     curl "$REQUIREMENTS_URL" > requirements.txt
 
     TAGGED_IMAGE=$IMAGE:$tag

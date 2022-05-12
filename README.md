@@ -6,12 +6,12 @@
 ## Versions
 - Images built using the linux/amd64 architecture have names: `shardlabs/cairo-cli:<TAG>`.
 - Images built using the linux/arm64 architecture have names: `shardlabs/cairo-cli:<TAG>-arm`
-- An image has been built for each cairo-lang version, with `TAG` being the version in the semver format (e.g. for version `0.8.2` the image is `shardlabs/cairo-cli:0.8.2`).
+- An image has been built for each cairo-lang version, with `TAG` being the version in the semver format (e.g. for version `0.8.2.1` the image is `shardlabs/cairo-cli:0.8.2.1`).
 - [The Docker Hub list of versions/tags](https://hub.docker.com/repository/registry-1.docker.io/shardlabs/cairo-cli/tags) is generally up-to-date with [the official Cairo pypi repo](https://pypi.org/pypi/cairo-lang/json).
 - The latest version is also tagged with `latest`.
 
 ## Preinstalled packages
-Since cairo-cli:0.8.2, images come with `openzeppelin-cairo-contracts` Python package preinstalled.
+Since cairo-cli:0.8.2.1, images come with `openzeppelin-cairo-contracts` Python package preinstalled.
 
 ## Usage
 Practically anything available with `cairo-compile`, `starknet-compile` and `starknet` commands (as specified [here](https://www.cairo-lang.org/docs/hello_starknet/index.html)) is also available through these images.
@@ -20,20 +20,20 @@ Here are a few usage examples (These rely on [Docker bind mount](https://docs.do
 
 ### Pull and check
 ```
-$ docker pull shardlabs/cairo-cli:0.8.2
+$ docker pull shardlabs/cairo-cli:0.8.2.1
 
-$ docker run shardlabs/cairo-cli:0.8.2 cairo-compile -v
-cairo-compile 0.8.2
+$ docker run shardlabs/cairo-cli:0.8.2.1 cairo-compile -v
+cairo-compile 0.8.2.1
 
-$ docker run shardlabs/cairo-cli:0.8.2 starknet -v
-starknet 0.8.2
+$ docker run shardlabs/cairo-cli:0.8.2.1 starknet -v
+starknet 0.8.2.1
 ```
 
 ### Cairo compiler
 ```
 $ docker run \
     --mount type=bind,source=/my/project/contracts/,target=/contracts/ \
-    shardlabs/cairo-cli:0.8.2 \
+    shardlabs/cairo-cli:0.8.2.1 \
     cairo-compile contracts/test.cairo
 {
     "builtins": [],
@@ -49,7 +49,7 @@ $ docker run \
 ```
 $ docker run \
     --mount type=bind,source=/my/project/contracts/,target=/contracts/ \
-    shardlabs/cairo-cli:0.8.2 \
+    shardlabs/cairo-cli:0.8.2.1 \
     starknet-compile contracts/test.cairo
 {
     "abi": [],

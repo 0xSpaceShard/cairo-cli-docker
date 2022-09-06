@@ -1,4 +1,4 @@
-FROM python:3.7.12-alpine3.15 as builder
+FROM python:3.9.13-alpine3.16 as builder
 
 COPY requirements.txt .
 
@@ -11,7 +11,7 @@ RUN pip wheel --no-cache-dir --no-deps\
     -r requirements.txt\
     cairo-lang==$CAIRO_VERSION openzeppelin-cairo-contracts
 
-FROM python:3.7.12-alpine3.15
+FROM python:3.9.13-alpine3.16
 
 RUN apk add --no-cache libgmpxx
 

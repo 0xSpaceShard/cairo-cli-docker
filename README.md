@@ -11,7 +11,7 @@
 - The latest version is also tagged with `latest`.
 
 ## Preinstalled packages
-Since cairo-cli:0.10.0, images come with `openzeppelin-cairo-contracts` Python package preinstalled.
+Since cairo-cli:0.8.1, images come with `openzeppelin-cairo-contracts` Python package preinstalled.
 
 ## Usage
 Practically anything available with `cairo-compile`, `starknet-compile` and `starknet` commands (as specified [here](https://www.cairo-lang.org/docs/hello_starknet/index.html)) is also available through these images.

@@ -19,7 +19,7 @@ curl "$REQUIREMENTS_URL" > requirements.txt
 TAGGED_IMAGE="$IMAGE:$TAG"
 LATEST_IMAGE="$IMAGE:latest$TAG_SUFFIX"
 docker build \
-    -t "$TAGGED_IMAGE" -t "$LATEST_TAG" \
+    -t "$TAGGED_IMAGE" -t "$LATEST_IMAGE" \
     --build-arg CAIRO_VERSION="$CAIRO_VERSION" .
 
 # verify

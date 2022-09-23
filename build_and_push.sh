@@ -7,7 +7,7 @@ TAG="${CAIRO_VERSION}${TAG_SUFFIX}"
 docker login --username "$DOCKER_USER" --password "$DOCKER_PASS"
 
 # get requirements
-REQUIREMENTS_URL="https://raw.githubusercontent.com/starkware-libs/cairo-lang/v$version/scripts/requirements.txt"
+REQUIREMENTS_URL="https://raw.githubusercontent.com/starkware-libs/cairo-lang/v$CAIRO_VERSION/scripts/requirements.txt"
 status=$(curl -s -o /dev/null -w "%{http_code}" "$REQUIREMENTS_URL")
 if [ "$status" != 200 ]; then
     echo "Error! Got status $status while fetching requirements"

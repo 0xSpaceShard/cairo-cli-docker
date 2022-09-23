@@ -16,7 +16,12 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.7
-      - run: ./build_and_push.sh
+      - run:
+          name: Build and push image
+          command: ./build_and_push.sh
+          environment:
+            TAG_SUFFIX: ""
+            CAIRO_VERSION: 0.10.0
   build_push_arm:
     machine:
       image: ubuntu-2004:202111-02
@@ -28,7 +33,7 @@ jobs:
           command: ./build_and_push.sh
           environment:
             TAG_SUFFIX: -arm
-            MIN_VER: 0.8.1 # this should only be changed to something lower if we want to build all the arm images for those versions as well
+            CAIRO_VERSION: 0.10.0
 
 workflows:
   version: 2

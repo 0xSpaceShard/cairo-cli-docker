@@ -21,7 +21,7 @@ jobs:
           command: ./build_and_push.sh
           environment:
             TAG_SUFFIX: ""
-            CAIRO_VERSION: 0.10.0
+            CAIRO_VERSION: 0.10.1
   build_push_arm:
     machine:
       image: ubuntu-2004:202111-02
@@ -33,7 +33,7 @@ jobs:
           command: ./build_and_push.sh
           environment:
             TAG_SUFFIX: -arm
-            CAIRO_VERSION: 0.10.0
+            CAIRO_VERSION: 0.10.1
 
 workflows:
   version: 2

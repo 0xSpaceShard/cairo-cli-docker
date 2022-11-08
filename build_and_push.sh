@@ -20,7 +20,9 @@ TAGGED_IMAGE="$IMAGE:$TAG"
 LATEST_IMAGE="$IMAGE:latest$TAG_SUFFIX"
 docker build \
     -t "$TAGGED_IMAGE" -t "$LATEST_IMAGE" \
-    --build-arg CAIRO_VERSION="$CAIRO_VERSION" OZ_VERSION="$OZ_VERSION" .
+    --build-arg CAIRO_VERSION="$CAIRO_VERSION" \
+    --build-arg OZ_VERSION="$OZ_VERSION" \
+    .
 
 # verify
 docker run "$TAGGED_IMAGE" starknet-compile --version

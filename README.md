@@ -69,6 +69,6 @@ $ docker run \
 
 ## Build a new image
 
-To build a new version (typically when a new cairo-lang version is released), update the `CAIRO_VERSION` in config.yml and create a commit. Building a new image will also tag it with `latest`. Preferably also update version references in README.md.
+To build a new version (typically when a new cairo-lang version is released), update the `CAIRO_VERSION` in config.yml and create a commit. Building a new image will also tag it with `latest`. Preferably also update version references in README.md. If needed, also update `OZ_VERSION`.
 
 To add new commits to the repo without building, add `[skip ci]` to the commit message.

@@ -1,8 +1,9 @@
 FROM rust:1.67-alpine AS builder
 
 # Install cairo1 compiler
+ARG CAIRO_COMPILER_TARGET_TAG
 RUN apk add git musl-dev && \
-    git clone https://github.com/starkware-libs/cairo.git
+    git clone -b $CAIRO_COMPILER_TARGET_TAG https://github.com/starkware-libs/cairo.git
 
 RUN cargo build --release --manifest-path /cairo/crates/cairo-lang-starknet/Cargo.toml
 RUN cargo build --release --manifest-path /cairo/crates/cairo-lang-sierra-to-casm/Cargo.toml

@@ -23,7 +23,7 @@ jobs:
             TAG_SUFFIX: ""
             CAIRO_VERSION: 0.11.0.2
             OZ_VERSION: 0.5.1
-            CAIRO_COMPILER_TARGET_TAG: "v1.0.0-alpha.7"
+            CAIRO_COMPILER_TARGET_TAG: "v1.0.0-alpha.6"
   build_push_arm:
     machine:
       image: ubuntu-2004:202111-02
@@ -37,7 +37,7 @@ jobs:
             TAG_SUFFIX: -arm
             CAIRO_VERSION: 0.11.0.2
             OZ_VERSION: 0.5.1
-            CAIRO_COMPILER_TARGET_TAG: "v1.0.0-alpha.7"
+            CAIRO_COMPILER_TARGET_TAG: "v1.0.0-alpha.6"
 
 workflows:
   version: 2

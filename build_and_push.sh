@@ -7,7 +7,9 @@ TAG="${CAIRO_VERSION}${TAG_SUFFIX}"
 docker login --username "$DOCKER_USER" --password "$DOCKER_PASS"
 
 # get requirements
-REQUIREMENTS_URL="https://raw.githubusercontent.com/starkware-libs/cairo-lang/v$CAIRO_VERSION/scripts/requirements.txt"
+# REQUIREMENTS_URL="https://raw.githubusercontent.com/starkware-libs/cairo-lang/v$CAIRO_VERSION/scripts/requirements.txt"
+# Temporary REQUIREMENTS_URL from a fork. https://github.com/starkware-libs/cairo-lang/pull/160
+REQUIREMENTS_URL="https://raw.githubusercontent.com/starkware-libs/cairo-lang/a375ecd6fbd8c82f1e87cabed9fd1544eb7bdd0d/scripts/requirements.txt" 
 status=$(curl -s -o /dev/null -w "%{http_code}" "$REQUIREMENTS_URL")
 if [ "$status" != 200 ]; then
     echo "Error! Got status $status while fetching requirements"
@@ -27,7 +29,7 @@ docker build \
 
 # verify
 docker run "$TAGGED_IMAGE" sh -c "starknet --version \
-    && starknet-compile --version \
+    && starknet-compile-deprecated --version \
     && /usr/local/bin/target/release/starknet-cairo1-compile --version \
     && /usr/local/bin/target/release/starknet-sierra-compile --version"
 # push

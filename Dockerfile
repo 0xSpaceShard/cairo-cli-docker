@@ -31,7 +31,7 @@ RUN apk add --no-cache libgmpxx
 COPY --from=stage /wheels /wheels
 COPY --from=builder /cairo/corelib /usr/local/bin/corelib
 COPY --from=builder /cairo/target/release/starknet-sierra-compile /usr/local/bin/target/release/starknet-sierra-compile
-COPY --from=builder /cairo/target/release/starknet-compile /usr/local/bin/target/release/starknet-cairo1-compile
+COPY --from=builder /cairo/target/release/starknet-compile /usr/local/bin/target/release/starknet-compile
 
 RUN pip install --no-cache /wheels/*
 

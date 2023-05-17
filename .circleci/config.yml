@@ -21,7 +21,7 @@ jobs:
           command: ./build_and_push.sh
           environment:
             TAG_SUFFIX: ""
-            CAIRO_VERSION: 0.11.1
+            CAIRO_VERSION: 0.11.1.1
             OZ_VERSION: 0.5.1
             CAIRO_COMPILER_TARGET_TAG: "v1.0.0-rc0"
   build_push_arm:
@@ -35,7 +35,7 @@ jobs:
           command: ./build_and_push.sh
           environment:
             TAG_SUFFIX: -arm
-            CAIRO_VERSION: 0.11.1
+            CAIRO_VERSION: 0.11.1.1
             OZ_VERSION: 0.5.1
             CAIRO_COMPILER_TARGET_TAG: "v1.0.0-rc0"
 

@@ -23,7 +23,7 @@ docker build \
     --build-arg CAIRO_VERSION="$CAIRO_VERSION" \
     --build-arg OZ_VERSION="$OZ_VERSION" \
     --build-arg CAIRO_COMPILER_TARGET_TAG="$CAIRO_COMPILER_TARGET_TAG" \
-    --build-arg CAIRO_COMPILER_TARGET_TAG="$CAIRO_COMPILER_TARGET_TAG" \
+    --build-arg SCARB_VERSION="$SCARB_VERSION" \
     .
 
 # verify

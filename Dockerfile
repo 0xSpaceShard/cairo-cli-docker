@@ -3,13 +3,14 @@ FROM rust:1.67-alpine AS compiler-builder
 ARG CAIRO_COMPILER_TARGET_TAG
 ARG SCARB_VERSION
 
+RUN apk add git musl-dev curl
+
 # Install scarb
 # doesn't work with /bin/sh and bash is not available by default
 ARG SHELL=/bin/ash
 RUN curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | $SHELL -s -- -v $SCARB_VERSION
 
 # Install cairo1 compiler
-RUN apk add git musl-dev curl
 RUN git clone -b $CAIRO_COMPILER_TARGET_TAG https://github.com/starkware-libs/cairo.git
 
 RUN cargo build --release --manifest-path /cairo/crates/cairo-lang-starknet/Cargo.toml

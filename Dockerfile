@@ -11,7 +11,7 @@ RUN cargo build --release --manifest-path /cairo/crates/cairo-lang-sierra-to-cas
 
 # Install scarb
 ARG SCARB_VERSION
-RUN curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | bash -s -- -v $SCARB_VERSION
+RUN curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh -s -- -v $SCARB_VERSION
 
 # Install cairo-lang
 FROM python:3.9.13-alpine3.16 as cairo-lang

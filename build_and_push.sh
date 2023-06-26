@@ -58,6 +58,11 @@ fi
 
 echo "Contracts compiled successfully!"
 
-# push
-docker push "$TAGGED_IMAGE"
-docker push "$LATEST_IMAGE"
+# Check if the current branch is "master"
+if [ "$CIRCLE_BRANCH" == "master" ]; then
+    # Push the Docker images
+    docker push "$TAGGED_IMAGE"
+    docker push "$LATEST_IMAGE"
+else
+    echo "Skipping Docker image push."
+fi

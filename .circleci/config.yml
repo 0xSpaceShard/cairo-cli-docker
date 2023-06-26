@@ -5,8 +5,8 @@ aliases:
     context: spaceshard
     filters:
       branches:
-        only:
-          - master
+        ignore:
+          - /^.*$/
 
 jobs:
   build_push:

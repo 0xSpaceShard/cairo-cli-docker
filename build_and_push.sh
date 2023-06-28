@@ -4,8 +4,6 @@ set -eu
 IMAGE=shardlabs/cairo-cli
 TAG="${CAIRO_VERSION}${TAG_SUFFIX}"
 
-docker login --username "$DOCKER_USER" --password "$DOCKER_PASS"
-
 # get requirements
 REQUIREMENTS_URL="https://raw.githubusercontent.com/starkware-libs/cairo-lang/v$CAIRO_VERSION/scripts/requirements.txt"
 status=$(curl -s -o /dev/null -w "%{http_code}" "$REQUIREMENTS_URL")
@@ -62,6 +60,8 @@ echo "Contracts compiled successfully!"
 
 # Check if the current branch is "master"
 if [ "$CIRCLE_BRANCH" == "master" ]; then
+    # Login to dockerhub
+    docker login --username "$DOCKER_USER" --password "$DOCKER_PASS"
     # Push the Docker images
     docker push "$TAGGED_IMAGE"
     docker push "$LATEST_IMAGE"

@@ -10,11 +10,11 @@ ARG SHELL=/bin/ash
 RUN curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | $SHELL -s -- -v $SCARB_VERSION
 
 ARG COMPILER_BINARY_URL
-ARG ASSET_NAME
+ARG CAIRO_COMPILER_ASSET_NAME
 
 # Download cairo1 compiler
 RUN curl --location -O --request GET $COMPILER_BINARY_URL
-RUN tar -zxvf $ASSET_NAME
+RUN tar -zxvf $CAIRO_COMPILER_ASSET_NAME
 
 # Install cairo-lang
 FROM python:3.9.13-alpine3.16 as cairo-lang

@@ -16,7 +16,7 @@ fi
 curl "$REQUIREMENTS_URL" > requirements.txt
 
 # compiler binary download URL
-COMPILER_BINARY_URL="https://github.com/starkware-libs/cairo/releases/download/$CAIRO_COMPILER_TARGET_TAG/$ASSET_NAME"
+COMPILER_BINARY_URL="https://github.com/starkware-libs/cairo/releases/download/$CAIRO_COMPILER_TARGET_TAG/$CAIRO_COMPILER_ASSET_NAME"
 # build and tag
 TAGGED_IMAGE="$IMAGE:$TAG"
 LATEST_IMAGE="$IMAGE:latest$TAG_SUFFIX"
@@ -25,7 +25,7 @@ docker build \
     --build-arg CAIRO_VERSION="$CAIRO_VERSION" \
     --build-arg OZ_VERSION="$OZ_VERSION" \
     --build-arg COMPILER_BINARY_URL="$COMPILER_BINARY_URL" \
-    --build-arg ASSET_NAME="$ASSET_NAME" \
+    --build-arg CAIRO_COMPILER_ASSET_NAME="$CAIRO_COMPILER_ASSET_NAME" \
     --build-arg SCARB_VERSION="$SCARB_VERSION" \
     .
 

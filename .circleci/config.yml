@@ -24,7 +24,7 @@ jobs:
             CAIRO_VERSION: "v0.11.2"
             OZ_VERSION: 0.5.1
             CAIRO_COMPILER_TARGET_TAG: "v1.1.0"
-            ASSET_NAME: "release-x86_64-unknown-linux-musl.tar.gz"
+            CAIRO_COMPILER_ASSET_NAME: "release-x86_64-unknown-linux-musl.tar.gz"
             SCARB_VERSION: 0.4.0
   build_push_arm:
     machine:
@@ -40,7 +40,7 @@ jobs:
             CAIRO_VERSION: "v0.11.2"
             OZ_VERSION: 0.5.1
             CAIRO_COMPILER_TARGET_TAG: "v1.1.0"
-            ASSET_NAME: "release-aarch64-apple-darwin.tar"
+            CAIRO_COMPILER_ASSET_NAME: "release-aarch64-apple-darwin.tar"
             SCARB_VERSION: 0.4.0
 
 workflows:

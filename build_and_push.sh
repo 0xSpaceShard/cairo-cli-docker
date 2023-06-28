@@ -38,11 +38,6 @@ cairo_0_output="$dir/artifacts/contracts/cairo"
 mkdir -p "$cairo_1_output"
 mkdir -p "$cairo_0_output"
 
-docker run "$TAGGED_IMAGE" sh -c "starknet --version \
-    && starknet-compile-deprecated --version \
-    && /usr/local/bin/target/release/starknet-compile --version \
-    && /usr/local/bin/target/release/starknet-sierra-compile --version"
-
 # compile cairo 0 contract
 docker run -v "$dir":"$dir" "$TAGGED_IMAGE" \
     sh -c "starknet-compile-deprecated "$dir/$cairo_0_contract" --abi "$cairo_0_output/contract_abi.json" --output "$cairo_0_output/contract.json""

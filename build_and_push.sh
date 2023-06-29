@@ -32,8 +32,8 @@ docker build \
 # verify
 docker run "$TAGGED_IMAGE" sh -c "starknet --version \
     && starknet-compile-deprecated --version \
-    && /usr/local/bin/cairo/bin/starknet-compile --version \
-    && /usr/local/bin/cairo/bin/starknet-sierra-compile --version"
+    && /usr/local/bin/target/release/starknet-compile --version \
+    && /usr/local/bin/target/release/starknet-sierra-compile --version"
 # push
 docker push "$TAGGED_IMAGE"
 docker push "$LATEST_IMAGE"

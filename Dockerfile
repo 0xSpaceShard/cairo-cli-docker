@@ -38,7 +38,7 @@ RUN apk add --no-cache libgmpxx
 
 COPY --from=cairo-lang /wheels /wheels
 
-# Copy directory should be changed to /usr/local/bin/cairo
+# We copy to /usr/local/bin/target/release as expected by starknet-hardhat-plugin.
 COPY --from=compiler /cairo/bin /usr/local/bin/target/release
 COPY --from=compiler /cairo/corelib /usr/local/bin/target/corelib
 COPY --from=compiler /root/.local/share/scarb-install/${SCARB_VERSION}/bin/scarb /usr/local/bin/scarb

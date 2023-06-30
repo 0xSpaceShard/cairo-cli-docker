@@ -36,7 +36,7 @@ ARG SCARB_VERSION
 
 RUN apk add --no-cache libgmpxx
 
-COPY --from=cairo-lang /wheels /wheels
+COPY --from=compiler /wheels /wheels
 
 # We copy to /usr/local/bin/target/release as expected by starknet-hardhat-plugin.
 COPY --from=compiler /cairo/bin /usr/local/bin/target/release

@@ -27,8 +27,8 @@ jobs:
             CAIRO_COMPILER_ASSET_NAME: "release-x86_64-unknown-linux-musl.tar.gz"
             SCARB_VERSION: 0.4.0
   build_push_arm:
-    macos:
-            xcode: 14.2.0
+    docker:
+      - image: cimg/deploy:2022.08
     resource_class: macos.m1.large.gen1
     steps:
       - checkout
